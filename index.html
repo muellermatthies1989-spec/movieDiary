@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Diary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { ink: "#0F1F2A", panel: "#17303F", line: "#2A4858", paper: "#E8F0EE", gold: "#F2B134", mint: "#7FD1C7" },
+          fontFamily: { sans: ["Bricolage Grotesque", "system-ui", "sans-serif"] },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-ink text-paper font-sans min-h-screen">
+  <header class="border-b border-line">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+      <a href="index.html" class="text-xl font-extrabold tracking-tight">Movie Diary</a>
+      <ul class="flex items-center gap-2 text-sm font-semibold">
+        <li><a href="index.html" aria-current="page" class="rounded-full bg-gold px-4 py-2 text-ink">Startseite</a></li>
+        <li>
+          <a href="journal.html" class="rounded-full px-4 py-2 hover:bg-panel focus-visible:outline focus-visible:outline-2 focus-visible:outline-mint">
+            Journal <span id="nav-count" class="ml-1 rounded-full bg-line px-2 py-0.5 text-xs">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-10">
+    <section class="mb-12">
+      <h1 class="max-w-2xl text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">Welchen Film hast du zuletzt gesehen?</h1>
+      <p class="mt-4 max-w-xl text-paper/70">Suche einen Film, speichere ihn in deinem Journal und halte fest, was du davon behalten willst.</p>
+
+      <form id="search-form" class="mt-8 flex max-w-2xl overflow-hidden rounded-xl bg-gold text-ink" role="search">
+        <label for="search-input" class="sr-only">Filmtitel</label>
+        <input id="search-input" type="search" required placeholder="Filmtitel eingeben" class="min-w-0 flex-1 bg-transparent px-5 py-4 text-lg font-semibold placeholder:text-ink/50 focus:outline-none" />
+        <button type="submit" class="border-l-2 border-dashed border-ink/40 px-6 text-lg font-extrabold hover:bg-ink hover:text-gold focus-visible:bg-ink focus-visible:text-gold focus-visible:outline-none">Suchen</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="popular-title">
+      <h2 id="popular-title" class="mb-6 text-2xl font-extrabold tracking-tight">Gerade beliebt</h2>
+      <p id="status" class="mb-4 text-paper/70" role="status">Filme werden geladen …</p>
+      <div id="movie-grid" class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5"></div>
+    </section>
+  </main>
+
+  <dialog id="search-dialog" class="m-auto max-h-[85vh] w-[min(60rem,92vw)] rounded-2xl bg-panel p-0 text-paper backdrop:bg-black/70">
+    <div class="sticky top-0 flex items-center justify-between border-b border-line bg-panel px-6 py-4">
+      <h2 id="dialog-title" class="text-xl font-extrabold tracking-tight">Suchergebnisse</h2>
+      <button id="dialog-close" type="button" class="rounded-full bg-line px-4 py-2 text-sm font-semibold hover:bg-gold hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-mint">Schließen</button>
+    </div>
+    <div class="p-6">
+      <p id="dialog-message" class="mb-4 hidden text-paper/80" role="status"></p>
+      <div id="dialog-grid" class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4"></div>
+    </div>
+  </dialog>
+
+  <script src="main.js"></script>
+</body>
+</html>
